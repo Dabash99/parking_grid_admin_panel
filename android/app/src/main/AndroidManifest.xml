@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.parking_grid_admin.parking_grid_admin">
    <application
-        android:label="parking_grid_admin"
+        android:label="Parking Grid Admin"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

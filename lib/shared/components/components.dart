@@ -4,14 +4,15 @@ import 'package:parking_grid_admin/shared/styles/colors.dart';
 
 import 'package:widget_circular_animator/widget_circular_animator.dart';
 
-Widget myDivider() => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Container(
-        width: double.infinity,
-        height: 1,
-        color: Colors.grey.withOpacity(0.4),
-      ),
-    );
+Widget myDivider({@required Color color}) => Padding(
+  padding: const EdgeInsets.all(10.0),
+  child:   Container(
+    width: double.infinity,
+    height: 1,
+    color: color,
+
+  ),
+);
 
 Widget defaultFormField({
   @required TextEditingController controller,
@@ -146,11 +147,11 @@ Widget customAppBar({@required String title}) => AppBar(
         ),
       ),
       actions: <Widget>[
-        Image.asset(
+       /* Image.asset(
           'assets/images/w.png',
           height: 100,
           width: 100,
-        )
+        )*/
       ],
     );
 
@@ -228,3 +229,25 @@ Widget logoNewDesign() => WidgetCircularAnimator(
         ),
       ),
     ));
+
+Widget counterContainer({@required int length,@required String text}) => Align(
+  alignment: Alignment.topRight,
+  child: Container(
+    decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black,
+              offset: Offset(0.0, 0.3),
+              blurRadius: 1)
+        ],
+        color: Colors.blueAccent,
+        borderRadius: BorderRadius.circular(20)),
+    child: Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Text(
+        '$text :'+ '$length',
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  ),
+);

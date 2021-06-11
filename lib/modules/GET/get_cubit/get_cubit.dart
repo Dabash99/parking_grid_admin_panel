@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:parking_grid_admin/models/all_user_model.dart';
 import 'package:parking_grid_admin/models/locations.dart';
-import 'package:parking_grid_admin/models/login_model.dart';
+import 'package:parking_grid_admin/models/parks_model.dart';
 import 'package:parking_grid_admin/shared/network/end_points.dart';
 import 'package:parking_grid_admin/shared/network/remote/dio_helper.dart';
 
@@ -13,15 +15,15 @@ class GetCubit extends Cubit<GetState> {
 
   static GetCubit get(context) => BlocProvider.of(context);
 
-  LoginModel loginModel;
+  AllUsersdata allUsersdata;
 
   void getallUsers(){
     emit(LoadingAllUsers());
     DioHelper.getData(url: GETALLUSERS).then((value) {
-      //loginModel = LoginModel.fromJson(value.data);
+      allUsersdata = AllUsersdata.fromJson(value.data);
       print('Value from Response : ${value.data}');
-      // print('Value Saved : ${loginModel}');
-      emit(SuccessAllUsers(loginModel));
+      print('Value Saved : ${allUsersdata.users[0].firstName}');
+      emit(SuccessAllUsers(allUsersdata));
     }).catchError((onError){
       print('Error : $onError');
       emit(ErrorAllUsers(onError));
@@ -42,5 +44,20 @@ class GetCubit extends Cubit<GetState> {
     });
   }
 
+  GetAllParks getAllParks;
+
+  void getParks({@required String GarageName}){
+    emit(LoadingAllParksDataState());
+    DioHelper.getData(url: GETPARKS,query: {
+      'garagename':GarageName,
+    }).then((value) {
+      getAllParks= GetAllParks.fromJson(value.data);
+      print('Parks : ${getAllParks.parkings[0].parkingName}');
+      emit(SuccessAllParksDataState(getAllParks));
+    }).catchError((onError){
+      print('Error : $onError');
+      emit(ErrorAllParksDataState());
+    });
+  }
 
 }

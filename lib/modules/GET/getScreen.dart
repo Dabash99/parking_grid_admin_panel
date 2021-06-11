@@ -10,26 +10,25 @@ class GetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customAppBar(title: 'GET Panel'),
-      body: Column(
-        children: [
-          cutomContianer(context,
-            colorside: Colors.green,
-            imagePath: 'assets/images/profile.png', text: 'get all users',
-            widget: GetAllUsers(),
-          ),
-          cutomContianer(context,
+    return BlocProvider(
+      create: (context) => GetCubit(),
+      child: Scaffold(
+        appBar: customAppBar(title: 'GET Panel'),
+        body: Column(
+          children: [
+            cutomContianer(context,
               colorside: Colors.green,
-              imagePath: 'assets/images/logo_splash.png',
-              text: 'get all garages',
-              widget: AllGarages()
-          ),
-          cutomContianer(context,
-              colorside: Colors.green,
-              imagePath: 'assets/images/car-park.png', text: 'get all parks'
-          )
-        ],
+              imagePath: 'assets/images/profile.png', text: 'get all users',
+              widget: GetAllUsers(),
+            ),
+            cutomContianer(context,
+                colorside: Colors.green,
+                imagePath: 'assets/images/logo_splash.png',
+                text: 'get all garages',
+                widget: AllGarages()
+            ),
+          ],
+        ),
       ),
     );
   }

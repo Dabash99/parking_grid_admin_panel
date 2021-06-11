@@ -9,9 +9,9 @@ class GetInitial extends GetState {}
 class LoadingAllUsers extends GetState{}
 
 class SuccessAllUsers extends GetState{
-  LoginModel loginModel;
+  AllUsersdata allUsersdata;
 
-  SuccessAllUsers (this.loginModel);
+  SuccessAllUsers (this.allUsersdata);
 }
 
 class ErrorAllUsers extends GetState{
@@ -30,3 +30,14 @@ class SuccessAllGaragesState extends GetState
 
 }
 class ErrorAllGaragesState extends GetState {}
+
+class LoadingAllParksDataState extends GetState {}
+
+class SuccessAllParksDataState extends GetState
+{
+  GetAllParks getAllParks;
+
+  SuccessAllParksDataState(this.getAllParks);
+
+}
+class ErrorAllParksDataState extends GetState {}

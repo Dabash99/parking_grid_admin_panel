@@ -18,16 +18,6 @@ class GetAllParks {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['cityName'] = this.cityName;
-    data['garageName'] = this.garageName;
-    if (this.parkings != null) {
-      data['parkings'] = this.parkings.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
 }
 
 class Parkings {
@@ -58,24 +48,13 @@ class Parkings {
     Mode =json['mode'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.userData != null) {
-      data['userData'] = this.userData.toJson();
-    }
-    data['_id'] = this.sId;
-    data['parking_Floor'] = this.parkingFloor;
-    data['parking_Name'] = this.parkingName;
-    data['status'] = this.status;
-    return data;
-  }
 }
 
 class UserData {
   String email;
   String phoneNumber;
-  int carNumber;
-  String carLetter;
+  dynamic carNumber;
+  dynamic carLetter;
 
   UserData({this.email, this.phoneNumber, this.carNumber, this.carLetter});
 
@@ -84,14 +63,5 @@ class UserData {
     phoneNumber = json['phoneNumber'];
     carNumber = json['carNumber'];
     carLetter = json['carLetter'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
-    data['phoneNumber'] = this.phoneNumber;
-    data['carNumber'] = this.carNumber;
-    data['carLetter'] = this.carLetter;
-    return data;
   }
 }

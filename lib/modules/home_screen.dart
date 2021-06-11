@@ -24,7 +24,12 @@ class _HomeScreenState extends State<HomeScreen> {
               imagePath: 'assets/images/mail.png',
               colorside: Colors.yellow,
               text: 'Post',widget: PostScreen()
-              )
+              ),
+          cutomContianer(context,
+              imagePath: 'assets/images/database.png',
+              colorside: Colors.red,
+              text: 'Delete',widget: PostScreen()
+          )
         ],
       ),
     );
