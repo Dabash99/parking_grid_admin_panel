@@ -12,7 +12,7 @@ class GetAllUsers extends StatelessWidget {
       child: BlocConsumer<GetCubit, GetState>(
         listener: (context, state) {},
         builder: (context, state) {
-          var usersCubit = GetCubit.get(context).allUsersdata;
+          var usersCubit = GetCubit.get(context);
           return Scaffold(
               appBar: customAppBar(title: 'All Users'),
               body: ConditionalBuilder(
@@ -23,55 +23,61 @@ class GetAllUsers extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: counterContainer(text: 'Users Count', length: usersCubit.users.length),
+                        child: counterContainer(text: 'Users Count', length: usersCubit.allUsersdata.users.length),
                       ),
                       Expanded(
                         child: ListView.separated(
                           physics: BouncingScrollPhysics(),
-                          itemCount: usersCubit.users.length,
+                          itemCount: usersCubit.allUsersdata.users.length,
                           separatorBuilder: (context, index) {
-                            return myDivider();
+                            return myDivider(color: Colors.white);
                           },
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border(left: BorderSide(color: Colors.amberAccent,width: 10))),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Name : ${usersCubit.users[index].firstName + ' ' + usersCubit.users[index].lastName}',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Jannah'),
-                                      ),
-                                      Text(
-                                          'Car Plate : ${usersCubit.users[index].carNumber.join(' ') + ' | ' + usersCubit.users[index].carLetter.join(' ')}',
+                            return Dismissible(
+                              key: Key(usersCubit.allUsersdata.users[index].sId),
+                                onDismissed:(direction){
+                                  usersCubit.deleteUser(userID: usersCubit.allUsersdata.users[index].sId);
+                                },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(left: BorderSide(color: Colors.amberAccent,width: 10))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name : ${usersCubit.allUsersdata.users[index].firstName + ' ' + usersCubit.allUsersdata.users[index].lastName}',
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
-                                              fontFamily: 'Jannah')),
-                                      Text(
-                                          'Email Address : ${usersCubit.users[index].email}',
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Jannah')),
-                                      Text(
-                                          'Phone Number : ${usersCubit.users[index].phoneNumber}',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Jannah'))
-                                    ],
+                                              fontFamily: 'Jannah'),
+                                        ),
+                                        Text(
+                                            'Car Plate : ${usersCubit.allUsersdata.users[index].carNumber.join(' ') + ' | ' + usersCubit.allUsersdata.users[index].carLetter.join(' ')}',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Jannah')),
+                                        Text(
+                                            'Email Address : ${usersCubit.allUsersdata.users[index].email}',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Jannah')),
+                                        Text(
+                                            'Phone Number : ${usersCubit.allUsersdata.users[index].phoneNumber}',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Jannah'))
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

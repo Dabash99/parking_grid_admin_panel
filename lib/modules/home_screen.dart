@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:parking_grid_admin/modules/DELETE/delete_garage.dart';
 import 'package:parking_grid_admin/modules/GET/getScreen.dart';
-import 'package:parking_grid_admin/modules/postScreen.dart';
+import 'package:parking_grid_admin/modules/POST/postScreen.dart';
 import 'package:parking_grid_admin/shared/components/components.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,17 +19,17 @@ class _HomeScreenState extends State<HomeScreen> {
           cutomContianer(context,
               imagePath: 'assets/images/get.png',
               colorside: Colors.green,
-              text: 'get',widget: GetScreen()
+              text: 'get users and garages',widget: GetScreen()
              ),
           cutomContianer(context,
               imagePath: 'assets/images/mail.png',
               colorside: Colors.yellow,
-              text: 'Post',widget: PostScreen()
+              text: 'Create New Garage',widget: PostScreen()
               ),
           cutomContianer(context,
               imagePath: 'assets/images/database.png',
               colorside: Colors.red,
-              text: 'Delete',widget: PostScreen()
+              text: 'Delete Garage or park',widget: DeleteGarage()
           )
         ],
       ),

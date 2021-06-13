@@ -41,3 +41,34 @@ class SuccessAllParksDataState extends GetState
 
 }
 class ErrorAllParksDataState extends GetState {}
+
+class LoadingDeleteGarageState extends GetState{}
+
+class SuccessDeleteGarageState extends GetState{}
+
+class ErrorDeleteGarageState extends GetState{}
+
+class LoadingDeleteParkState extends GetState{}
+
+class SuccessDeleteParkState extends GetState{}
+
+class ErrorDeleteParkState extends GetState{}
+
+class LoadingDeleteUserState extends GetState{}
+
+class SuccessDeleteUserState extends GetState{}
+
+class ErrorDeleteUserState extends GetState{}
+
+class LoadingCreateGarageState extends GetState{}
+
+class SuccessCreateGarageState extends GetState{}
+
+class ErrorCreateGarageState extends GetState{}
+
+class LoadingCreateParkState extends GetState{}
+
+class SuccessCreateParkState extends GetState{}
+
+class ErrorCreateParkState extends GetState{}
+

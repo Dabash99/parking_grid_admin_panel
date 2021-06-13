@@ -87,4 +87,20 @@ class DioHelper {
       data: data,
     );
   }
+
+  static Future<Response> deleteData({
+    @required String url,
+    @required Map<String, dynamic> query,
+  }) async
+  {
+    dio.options.headers =
+    {
+      'Content-Type': 'application/json',
+    };
+
+    return dio.delete(
+      url,
+      queryParameters: query,
+    );
+  }
 }

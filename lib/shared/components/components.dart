@@ -5,14 +5,13 @@ import 'package:parking_grid_admin/shared/styles/colors.dart';
 import 'package:widget_circular_animator/widget_circular_animator.dart';
 
 Widget myDivider({@required Color color}) => Padding(
-  padding: const EdgeInsets.all(10.0),
-  child:   Container(
-    width: double.infinity,
-    height: 1,
-    color: color,
-
-  ),
-);
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: double.infinity,
+        height: 1,
+        color: color,
+      ),
+    );
 
 Widget defaultFormField({
   @required TextEditingController controller,
@@ -21,8 +20,8 @@ Widget defaultFormField({
   Function onChange,
   Function onTap,
   bool isPassword = false,
-  @required Function validate,
-  @required String label,
+  Function validate,
+  String label,
   IconData prefix,
   IconData suffix,
   Function suffixPressed,
@@ -147,7 +146,7 @@ Widget customAppBar({@required String title}) => AppBar(
         ),
       ),
       actions: <Widget>[
-       /* Image.asset(
+        /* Image.asset(
           'assets/images/w.png',
           height: 100,
           width: 100,
@@ -182,7 +181,11 @@ Widget cutomContianer(context,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(imagePath,width: 100,height: 100,),
+                Image.asset(
+                  imagePath,
+                  width: 100,
+                  height: 100,
+                ),
                 Text(
                   text.toUpperCase(),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
@@ -230,24 +233,17 @@ Widget logoNewDesign() => WidgetCircularAnimator(
       ),
     ));
 
-Widget counterContainer({@required int length,@required String text}) => Align(
-  alignment: Alignment.topRight,
-  child: Container(
-    decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black,
-              offset: Offset(0.0, 0.3),
-              blurRadius: 1)
-        ],
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(20)),
-    child: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Text(
-        '$text :'+ '$length',
-        style: TextStyle(color: Colors.white),
-      ),
+Widget counterContainer({@required int length, @required String text}) => Container(
+  decoration: BoxDecoration(boxShadow: [
+    BoxShadow(
+        color: Colors.black, offset: Offset(0.0, 0.3), blurRadius: 1)
+  ], color: Colors.blueAccent, borderRadius: BorderRadius.circular(20)),
+  child: Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Text(
+      '$text :' + '$length',
+      style: TextStyle(color: Colors.white),
     ),
   ),
 );
+

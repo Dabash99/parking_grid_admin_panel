@@ -1,11 +1,12 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parking_grid_admin/modules/GET/allparks/garage_parks.dart';
+import 'package:parking_grid_admin/modules/DELETE/delete_park.dart';
 import 'package:parking_grid_admin/modules/GET/get_cubit/get_cubit.dart';
 import 'package:parking_grid_admin/shared/components/components.dart';
+import 'package:parking_grid_admin/shared/styles/colors.dart';
 
-class AllGarages extends StatelessWidget {
+class DeleteGarage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -15,11 +16,11 @@ class AllGarages extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          var garageCubit = GetCubit.get(context).getAllGarages;
+          var garageCubit = GetCubit.get(context);
           return Scaffold(
-              appBar: customAppBar(title: 'All Garages '),
+              appBar: customAppBar(title: 'Delete garage '),
               body: ConditionalBuilder(
-                condition: state is SuccessAllGaragesState,
+                condition: state is SuccessAllGaragesState || state is SuccessDeleteGarageState,
                 builder: (context) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -28,12 +29,12 @@ class AllGarages extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10),
                         child: counterContainer(
                             text: 'Garage Count',
-                            length: garageCubit.garages.length),
+                            length: garageCubit.getAllGarages.garages.length),
                       ),
                       Expanded(
                         child: ListView.separated(
                           physics: BouncingScrollPhysics(),
-                          itemCount: garageCubit.garages.length,
+                          itemCount: garageCubit.getAllGarages.garages.length,
                           separatorBuilder: (context, index) {
                             return myDivider(color: Colors.white);
                           },
@@ -55,26 +56,26 @@ class AllGarages extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Garage Name : ${garageCubit.garages[index].garageName}',
+                                        'Garage Name : ${garageCubit.getAllGarages.garages[index].garageName}',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                             fontFamily: 'Jannah'),
                                       ),
                                       Text(
-                                          'City Name : ${garageCubit.garages[index].cityName}',
+                                          'City Name : ${garageCubit.getAllGarages.garages[index].cityName}',
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'Jannah')),
                                       Text(
-                                          'Latitude : ${garageCubit.garages[index].lat}',
+                                          'Latitude : ${garageCubit.getAllGarages.garages[index].lat}',
                                           style: TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               fontFamily: 'Jannah')),
                                       Text(
-                                          'Longitude : ${garageCubit.garages[index].long}',
+                                          'Longitude : ${garageCubit.getAllGarages.garages[index].long}',
                                           style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
@@ -82,20 +83,43 @@ class AllGarages extends StatelessWidget {
                                       Align(
                                         alignment: Alignment.bottomCenter,
                                         child: ElevatedButton(
-                                          style: ButtonStyle(
-                                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(12),
-                                                  )
-                                              )
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Colors.red,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
                                           ),
                                           onPressed: () {
-                                            navigateTo(context, ParksScreen(cityname:garageCubit.garages[index].cityName,garageName: garageCubit.garages[index].garageName));
+                                            garageCubit.deleteGarage(
+                                                GarageName: garageCubit
+                                                    .getAllGarages
+                                                    .garages[index]
+                                                    .garageName,
+                                                CityName: garageCubit
+                                                    .getAllGarages
+                                                    .garages[index]
+                                                    .cityName);
                                           },
-                                        child: Text('View ${garageCubit.garages[index].garageName} Parks'),
-
+                                          child: Text(
+                                              'Delete ${garageCubit.getAllGarages.garages[index].garageName} Garage'),
                                         ),
-                                      )
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: defaultColor,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(8)),
+                                          ),
+                                          onPressed: () {
+                                            navigateTo(context, DeletePark(garageName: garageCubit.getAllGarages.garages[index].garageName));
+                                          },
+                                          child: Text(
+                                              'View ${garageCubit.getAllGarages.garages[index].garageName} Park'),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
