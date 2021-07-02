@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Parking Admin Panel',
       theme: lightTheme,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
